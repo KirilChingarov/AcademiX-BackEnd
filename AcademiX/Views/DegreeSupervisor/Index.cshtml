@@ -1,0 +1,34 @@
+﻿@{
+    ViewData["Title"] = "Degree supervisors";
+}
+
+@model IEnumerable<DegreeSupervisor>
+
+<h1>Degree Supervisors</h1>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>
+                Name
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var obj in Model)
+        {
+            <tr>
+                <td class="d-flex justify-content-between">
+                    @obj.Email
+                    <a asp-controller="DegreeSupervisor" asp-action="Detail" asp-route-id="@obj.Id" class="btn btn-primary">
+                        View
+                    </a>
+                </td>             
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+
+
