@@ -1,6 +1,14 @@
-﻿namespace AcademiX.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace AcademiX.Models
 {
-	public class DegreeSupervisor
+	public class DegreeSupervisor : User
 	{
+		[EmailAddress]
+		public string Email { get; set; }
+		public int Cabinet { get; set; }
+		public string WorkingTime { get; set; }
+		public bool IsReviewer { get; set; }
+
 	}
 }
