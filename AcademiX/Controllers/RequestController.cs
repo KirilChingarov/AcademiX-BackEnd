@@ -11,11 +11,11 @@ namespace AcademiX.Controllers
 {
     public class RequestController : Controller
     {
-        private readonly IRequestService _requestService;
+        private readonly ApplicationDbContext _context;
 
-        public RequestController(IRequestService requestService)
+        public RequestController(ApplicationDbContext context)
         {
-            _requestService = requestService;
+            _context = context;
         }
 
         //Create
@@ -27,7 +27,7 @@ namespace AcademiX.Controllers
                 return View(request);
             }
 
-            _requestService.CreateRequest(request);
+            _context.CreateRequest(request);
             return RedirectToAction("Index");
         }
 
@@ -35,13 +35,13 @@ namespace AcademiX.Controllers
         [HttpPost]
         public ActionResult Send(int id)
         {
-            var request = _requestService.GetRequestById(id);
+            var request = _context.GetRequestById(id);
             if (request == null)
             {
-                return HttpNotFound();
+                return BadRequest();
             }
 
-            _requestService.SendRequest(id);
+            _context.SendRequest(id);
             return RedirectToAction("Index");
         }
 
@@ -49,10 +49,10 @@ namespace AcademiX.Controllers
         [HttpGet]
         public ActionResult Details(int id)
         {
-            var request = _requestService.GetRequestById(id);
+            var request = _context.GetRequestById(id);
             if (request == null)
             {
-                return HttpNotFound();
+                return BadRequest();
             }
 
             return View(request);
@@ -61,7 +61,7 @@ namespace AcademiX.Controllers
         //Requests by Student
         public ActionResult RequestsByStudent(int studentId)
         {
-            var requests = _requestService.GetRequestsByStudentId(studentId);
+            var requests = _context.GetRequestsByStudentId(studentId);
             return View(requests);
         }
 
@@ -69,7 +69,7 @@ namespace AcademiX.Controllers
         [HttpGet]
         public ActionResult RequestsBySupervisor(int supervisorId)
         {
-            var requests = _requestService.GetRequestsByDegreeSupervisorId(supervisorId);
+            var requests = _context.GetRequestsByDegreeSupervisorId(supervisorId);
             return View(requests);
         }
 
@@ -77,13 +77,13 @@ namespace AcademiX.Controllers
         [HttpPost]
         public ActionResult Accept(int id)
         {
-            var request = _requestService.GetRequestById(id);
+            var request = _context.GetRequestById(id);
             if (request == null)
             {
-                return HttpNotFound();
+                return BadRequest();
             }
 
-            _requestService.AcceptRequest(id);
+            _context.AcceptRequest(id);
             return RedirectToAction("Index");
         }
 
@@ -91,13 +91,13 @@ namespace AcademiX.Controllers
         [HttpPost]
         public ActionResult Deny(int id)
         {
-            var request = _requestService.GetRequestById(id);
+            var request = _context.GetRequestById(id);
             if (request == null)
             {
-                return HttpNotFound();
+                return BadRequest();
             }
 
-            _requestService.DenyRequest(id);
+            _context.DenyRequest(id);
             return RedirectToAction("Index");
         }
 
@@ -110,7 +110,7 @@ namespace AcademiX.Controllers
                 return View(request);
             }
 
-            _requestService.UpdateRequest(request);
+            _context.UpdateRequest(request);
             return RedirectToAction("Index");
         }
 
@@ -118,7 +118,7 @@ namespace AcademiX.Controllers
         [HttpPost]
         public ActionResult Delete(int id)
         {
-            _requestService.DeleteRequest(id);
+            _context.DeleteRequest(id);
             return RedirectToAction("Index");
         }
     }
