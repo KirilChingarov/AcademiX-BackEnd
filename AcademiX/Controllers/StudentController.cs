@@ -1,65 +1,59 @@
 ﻿using AcademiX.Data;
 using AcademiX.Models;
 using Microsoft.AspNetCore.Mvc;
+using AcademiX.Services.Contracts;
+using AcademiX.Services;
 
 namespace AcademiX.Controllers
 {
 	public class StudentController : Controller
 	{
-		private readonly ApplicationDbContext _context;
+		private readonly IStudentService _studentService;
 
-		public StudentController(ApplicationDbContext context)
+		public StudentController(IStudentService studentService)
 		{
-			_context = context;
-		}
-
-		public ActionResult<Student> CreateStudent(Student student)
-		{
-
-			if (student == null)
-			{
-				return BadRequest();
-			}
-
-			_context.Students.Add(student);
-			_context.SaveChanges();
-
-			return CreatedAtAction(nameof(student), new { id = student.Id }, student);
-		}
-
-		public ActionResult<Student> GetStudentById(int id)
-		{
-			var student = _context.Students.Find(id);
-
-			if (student == null)
-			{
-				return BadRequest();
-			}
-
-			return student;
-		}
-
-		//Suppose we have Database table Degrees
-		public ActionResult<Student> GetStudentByDegreeId(int degreeId)
-		{
-			var degree = _context.Degrees.Find(degreeId);
-
-			if (degree == null)
-			{
-				return BadRequest();
-			}
-
-			var student = degree.Student;
-
-			return student;
+			_studentService = studentService;
 		}
 
 		public ActionResult<IEnumerable<Student>> GetAllStudents()
 		{
-			return _context.Students.ToList();
+			var student = _studentService.GetAllStudents();
+
+			return View(student);
 		}
 
-		public ActionResult EditEmail(int id, string email)
+		public ActionResult<Student> GetStudentById(int id)
+		{
+			var student = _studentService.GetStudentById(id);
+
+			if (student == null)
+			{
+				return BadRequest();
+			}
+
+			return student;
+		}
+
+		public ActionResult<Student> GetStudentByDegreeId(int degreeId)
+		{
+			var students = _studentService.GetStudentByDegreeId(degreeId);
+
+			if (students == null)
+			{
+				return NotFound();
+			}
+
+			return students;
+		}
+		
+		public ActionResult<Student> CreateStudent(Student student)
+		{
+			_studentService.CreateStudent(student);
+
+			return CreatedAtAction(nameof(student), new { id = student.Id }, student);
+		}
+
+		/*public ActionResult EditEmail(int id, string email)
 		{
 			var student = GetStudentById(id).Value;
 
@@ -71,7 +65,7 @@ namespace AcademiX.Controllers
 			student.Email = email;
 
 			return UpdateStudent(student);
-		}
+		}*/
 
 		public ActionResult UpdateStudent(Student student)
 		{
@@ -80,9 +74,9 @@ namespace AcademiX.Controllers
 				return BadRequest();
 			}
 
-			_context.Students.Update(student);
+			var success = _studentService.UpdateStudent(student);
 
-			if (_context.SaveChanges() != 0)
+			if (success != 0)
 			{
 				return Ok();
 			}
@@ -94,16 +88,9 @@ namespace AcademiX.Controllers
 
 		public ActionResult DeleteStudent(int id)
 		{
-			ActionResult<Student> student = GetStudentById(id);
+			var success = _studentService.DeleteStudent(id);
 
-			if (student.Value == null)
-			{
-				return BadRequest();
-			}
-
-			_context.Students.Remove(student.Value);
-
-			if (_context.SaveChanges() != 0)
+			if (success != 0)
 			{
 				return Ok();
 			}
