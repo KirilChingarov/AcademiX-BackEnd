@@ -26,19 +26,19 @@ namespace AcademiX.Repositories
 			return _context.Students.Find(id) ?? throw new EntityNotFoundException();
 		}
 
-		public Student GetStudentByEmail(string email)
+		public Student GetStudentByUsername(string username)
 		{
-			return _context.Students.ToList().Where(student => student.Email == email).FirstOrDefault();
+			return _context.Students.ToList().Where(student => student.Username == username).FirstOrDefault();
 		}
 
 		// GetStudentsByDegreeId
-		public Student GetStudentByDegreeId(int degreeId)
+		/*public Student GetStudentByDegreeId(int degreeId)
 		{
 			return _context.Degrees.ToList()
 				.Where(degree => degree.Id == degreeId)
 				.Select(degree => degree.Student)
 				.FirstOrDefault();
-		}
+		}*/
 
 		public void CreateStudent(Student student)
 		{

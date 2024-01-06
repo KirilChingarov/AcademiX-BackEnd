@@ -6,6 +6,8 @@ namespace AcademiX.Models
 	{
 		[EmailAddress]
 		public string Email { get; set; }
+
+		public virtual User User { get; set; }
 	}
 
 	// public virtual ICollection<Degree> Degrees { get; set; }

@@ -16,5 +16,16 @@ namespace AcademiX.Data
 		public DbSet<Specialty> Specialties { get; set; }
 
 		//public DbSet<Degree> Degrees { get; set; }
+
+		protected override void OnModelCreating(ModelBuilder modelBuilder)
+		{
+			modelBuilder.Entity<Student>()
+				.HasOne(s => s.User)
+				.WithMany()
+				.HasForeignKey(s => s.Id)
+				.OnDelete(DeleteBehavior.Cascade); 
+
+			base.OnModelCreating(modelBuilder);
+		}
 	}
 }

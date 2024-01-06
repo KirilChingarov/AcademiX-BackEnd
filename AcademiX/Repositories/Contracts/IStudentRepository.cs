@@ -8,10 +8,7 @@ namespace AcademiX.Repositories.Contracts
 
 		public Student GetStudentById(int id);
 
-		public Student GetStudentByEmail(string email);
-
-		// GetStudentsByDegreeId !
-		public Student GetStudentByDegreeId(int id);
+		public Student GetStudentByUsername(string username);
 
 		public void CreateStudent(Student student);
 

@@ -8,7 +8,7 @@ namespace AcademiX.Services.Contracts
 
 		public Student GetStudentById(int id);
 
-		public Student GetStudentByEmail(string email);
+		public Student GetStudentByUsername(string username);
 
 		public Student GetStudentByDegreeId(int degreeId);
 

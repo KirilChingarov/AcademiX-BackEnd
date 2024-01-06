@@ -24,9 +24,11 @@ builder.Services.AddSession(options =>
 
 //Services
 builder.Services.AddScoped<ISpecialtyService, SpecialtyService>();
+builder.Services.AddScoped<IStudentService, StudentService>();
 
 //Repositories
 builder.Services.AddScoped<ISpecialtyRepository, SpecialtyRepository>();
+builder.Services.AddScoped<IStudentRepository, StudentRepository>();
 
 // Helpers 
 builder.Services.AddTransient<ModelMapper>();

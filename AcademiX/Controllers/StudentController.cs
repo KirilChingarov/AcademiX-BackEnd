@@ -28,13 +28,13 @@ namespace AcademiX.Controllers
 
 			if (student == null)
 			{
-				return BadRequest();
+				return NotFound();
 			}
 
 			return student;
 		}
 
-		public ActionResult<Student> GetStudentByDegreeId(int degreeId)
+		/*public ActionResult<Student> GetStudentByDegreeId(int degreeId)
 		{
 			var students = _studentService.GetStudentByDegreeId(degreeId);
 
@@ -44,7 +44,7 @@ namespace AcademiX.Controllers
 			}
 
 			return students;
-		}
+		}*/
 		
 		public ActionResult<Student> CreateStudent(Student student)
 		{

@@ -36,12 +36,12 @@ namespace AcademiX.Services
 			}
 		}
 
-		public Student GetStudentByEmail(string email)
+		public Student GetStudentByUsername(string username)
 		{
-			return _repository.GetStudentByEmail(email);
+			return _repository.GetStudentByUsername(username);
 		}
 
-		public Student GetStudentByDegreeId(int degreeId)
+		/*public Student GetStudentByDegreeId(int degreeId)
 		{
 			try
 			{
@@ -51,7 +51,7 @@ namespace AcademiX.Services
 			{
 				throw new EntityNotFoundException("Student with this degree id was not found.");
 			}
-		}
+		}*/
 
 		public void CreateStudent(Student student)
 		{
@@ -64,7 +64,7 @@ namespace AcademiX.Services
 
 				student.Id = ++id;
 
-				if (_repository.GetStudentByEmail(student.Email) != null)
+				if (_repository.GetStudentByUsername(student.Username) != null)
 				{
 					throw new DuplicateEntityException();
 				}
@@ -73,7 +73,7 @@ namespace AcademiX.Services
 			}
 			catch (DuplicateEntityException)
 			{
-				throw new DuplicateEntityException("Student with this e-mail is already created.");
+				throw new DuplicateEntityException("Student with this username is already created.");
 			}
 		}
 
@@ -84,7 +84,7 @@ namespace AcademiX.Services
 
 				var studentToChange = _repository.GetStudentById(student.Id);
 
-				if (_repository.GetStudentByEmail(student.Email) != null)
+				if (_repository.GetStudentByUsername(student.Username) != null)
 				{
 					throw new DuplicateEntityException();
 				}
@@ -99,7 +99,7 @@ namespace AcademiX.Services
 			}
 			catch (DuplicateEntityException)
 			{
-				throw new DuplicateEntityException("Student with this e-mail is already created.");
+				throw new DuplicateEntityException("Student with this username is already created.");
 			}
 		}
 
@@ -116,6 +116,11 @@ namespace AcademiX.Services
 			{
 				throw new EntityNotFoundException();
 			}
+		}
+
+		public Student GetStudentByDegreeId(int degreeId)
+		{
+			throw new NotImplementedException();
 		}
 	}
 }
