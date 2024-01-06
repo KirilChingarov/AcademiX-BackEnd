@@ -10,5 +10,6 @@ namespace AcademiX.Models
 		public string WorkingTime { get; set; }
 		public bool IsReviewer { get; set; }
 
+		public ICollection<SupervisorSpecialty> SupervisorSpecialties { get; set; }
 	}
 }

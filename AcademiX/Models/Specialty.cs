@@ -14,7 +14,10 @@ namespace AcademiX.Models
 
         [StringLength(100)]
         public string Description { get; set; }
-        public Specialty() {
+
+		public ICollection<DegreeSupervisorsSpecialties> DegreeSupervisorsSpecialties { get; set; }
+
+		public Specialty() {
             Id = -1;
             Name = string.Empty;
             Description = string.Empty;

@@ -1,135 +1,51 @@
 ﻿using AcademiX.Data;
 using AcademiX.Models;
 using Microsoft.AspNetCore.Mvc;
+using AcademiX.Services.Contracts;
+using AcademiX.Services;
 
 namespace AcademiX.Controllers
 {
 	public class DegreeSupervisorController : Controller
 	{
-		private readonly ApplicationDbContext _context;
+		private readonly IDegreeSupervisorService _degreeSupervisorService;
 
-		public DegreeSupervisorController(ApplicationDbContext context)
+		public DegreeSupervisorController(IDegreeSupervisorService degreeSupervisorService)
 		{
-			_context = context;
-		}
-
-		public ActionResult<DegreeSupervisor> CreateDegreeSupervisor(DegreeSupervisor degreeSupervisor)
-		{
-
-			if (degreeSupervisor == null)
-			{
-				return BadRequest();
-			}
-
-			_context.DegreeSupervisors.Add(degreeSupervisor);
-			_context.SaveChanges();
-
-			return CreatedAtAction(nameof(degreeSupervisor), new { id = degreeSupervisor.Id }, degreeSupervisor);
+			_degreeSupervisorService = degreeSupervisorService;
 		}
 
 		public ActionResult<IEnumerable<DegreeSupervisor>> GetAllDegreeSupervisors()
 		{
-			return _context.DegreeSupervisors.ToList();
+			var degreeSupervisor = _degreeSupervisorService.GetAllDegreeSupervisors();
+
+			return View(degreeSupervisor);
 		}
 
 		public ActionResult<DegreeSupervisor> GetDegreeSupervisorById(int id)
 		{
-			var degreeSupervisor = _context.DegreeSupervisors.Find(id);
+			var degreeSupervisor = _degreeSupervisorService.GetDegreeSupervisorById(id);
 
 			if (degreeSupervisor == null)
 			{
-				return BadRequest();
+				return NotFound();
 			}
 
 			return degreeSupervisor;
 		}
 
-		public ActionResult EditEmail(int id, string email)
+		public ActionResult<DegreeSupervisor> CreateDegreeSupervisor(DegreeSupervisor degreeSupervisor)
 		{
-			var degreeSupervisor = GetDegreeSupervisorById(id).Value;
+			_degreeSupervisorService.CreateDegreeSupervisor(degreeSupervisor);
 
-			if (degreeSupervisor == null)
-			{
-				return BadRequest();
-			}
-
-			degreeSupervisor.Email = email;
-
-			return UpdateDegreeSupervisor(degreeSupervisor);
-		}
-
-		public ActionResult EditCabinet(int id, int cabinet)
-		{
-			var degreeSupervisor = GetDegreeSupervisorById(id).Value;
-
-			if (degreeSupervisor == null)
-			{
-				return BadRequest();
-			}
-
-			degreeSupervisor.Cabinet = cabinet;
-
-			return UpdateDegreeSupervisor(degreeSupervisor);
-		}
-
-		public ActionResult EditWorkingTime(int id, string workingTime)
-		{
-			var degreeSupervisor = GetDegreeSupervisorById(id).Value;
-
-			if (degreeSupervisor == null)
-			{
-				return BadRequest();
-			}
-
-			degreeSupervisor.WorkingTime = workingTime;
-
-			return UpdateDegreeSupervisor(degreeSupervisor);
-		}
-
-		public ActionResult SetIsReviewer(int id)
-		{
-			var degreeSupervisor = GetDegreeSupervisorById(id).Value;
-
-			if (degreeSupervisor == null)
-			{
-				return BadRequest();
-			}
-
-			degreeSupervisor.IsReviewer = !degreeSupervisor.IsReviewer;
-			return UpdateDegreeSupervisor(degreeSupervisor);
-		}
-
-		public ActionResult UpdateDegreeSupervisor(DegreeSupervisor degreeSupervisor)
-		{
-			if (degreeSupervisor == null)
-			{
-				return BadRequest();
-			}
-
-			_context.DegreeSupervisors.Update(degreeSupervisor);
-
-			if (_context.SaveChanges() != 0)
-			{
-				return Ok();
-			}
-			else
-			{
-				return BadRequest();
-			}
+			return CreatedAtAction(nameof(degreeSupervisor), new { id = degreeSupervisor.Id }, degreeSupervisor);
 		}
 
 		public ActionResult DeleteDegreeSupervisor(int id)
 		{
-			ActionResult<DegreeSupervisor> degreeSupervisor = GetDegreeSupervisorById(id);
+			var success = _degreeSupervisorService.DeleteDegreeSupervisor(id);
 
-			if (degreeSupervisor.Value == null)
-			{
-				return BadRequest();
-			}
-
-			_context.DegreeSupervisors.Remove(degreeSupervisor.Value);
-
-			if (_context.SaveChanges() != 0)
+			if (success != 0)
 			{
 				return Ok();
 			}

@@ -14,5 +14,7 @@ namespace AcademiX.Data
         public DbSet<User> Users { get; set; }
 		public DbSet<DegreeSupervisor> DegreeSupervisors { get; set; }
 		public DbSet<Specialty> Specialties { get; set; }
-    }
+
+		public DbSet<SupervisorSpecialty> SupervisorSpecialties { get; set; }
+	}
 }
