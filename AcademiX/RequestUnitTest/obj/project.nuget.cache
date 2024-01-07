@@ -1,0 +1,66 @@
+{
+  "version": 2,
+  "dgSpecHash": "YlCrHtNITfsry2tO0DaBOcdkvGmmoEpits+MtkfWA1VkMFy47H1CSgp1Lo32hX/F3WGZnJt5P/kQK1PsPynI2A==",
+  "success": false,
+  "projectFilePath": "C:\\Users\\Atanas\\source\\repos\\KirilChingarov\\AcademiX-BackEnd\\RequestUnitTest\\UnitTests.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Atanas\\.nuget\\packages\\coverlet.collector\\1.0.1\\coverlet.collector.1.0.1.nupkg.sha512",
+    "C:\\Users\\Atanas\\.nuget\\packages\\microsoft.codecoverage\\16.2.0\\microsoft.codecoverage.16.2.0.nupkg.sha512",
+    "C:\\Users\\Atanas\\.nuget\\packages\\microsoft.net.test.sdk\\16.2.0\\microsoft.net.test.sdk.16.2.0.nupkg.sha512",
+    "C:\\Users\\Atanas\\.nuget\\packages\\xunit\\2.6.3\\xunit.2.6.3.nupkg.sha512",
+    "C:\\Users\\Atanas\\.nuget\\packages\\xunit.abstractions\\2.0.3\\xunit.abstractions.2.0.3.nupkg.sha512",
+    "C:\\Users\\Atanas\\.nuget\\packages\\xunit.analyzers\\1.7.0\\xunit.analyzers.1.7.0.nupkg.sha512",
+    "C:\\Users\\Atanas\\.nuget\\packages\\xunit.assert\\2.6.3\\xunit.assert.2.6.3.nupkg.sha512",
+    "C:\\Users\\Atanas\\.nuget\\packages\\xunit.core\\2.6.3\\xunit.core.2.6.3.nupkg.sha512",
+    "C:\\Users\\Atanas\\.nuget\\packages\\xunit.extensibility.core\\2.6.3\\xunit.extensibility.core.2.6.3.nupkg.sha512",
+    "C:\\Users\\Atanas\\.nuget\\packages\\xunit.extensibility.execution\\2.6.3\\xunit.extensibility.execution.2.6.3.nupkg.sha512",
+    "C:\\Users\\Atanas\\.nuget\\packages\\xunit.runner.visualstudio\\2.4.1\\xunit.runner.visualstudio.2.4.1.nupkg.sha512"
+  ],
+  "logs": [
+    {
+      "code": "NU1201",
+      "level": "Error",
+      "message": "Project AcademiX is not compatible with net472 (.NETFramework,Version=v4.7.2). Project AcademiX supports: net6.0 (.NETCoreApp,Version=v6.0)",
+      "libraryId": "AcademiX",
+      "targetGraphs": [
+        ".NETFramework,Version=v4.7.2"
+      ]
+    },
+    {
+      "code": "NU1201",
+      "level": "Error",
+      "message": "Project AcademiX is not compatible with net472 (.NETFramework,Version=v4.7.2) / win. Project AcademiX supports: net6.0 (.NETCoreApp,Version=v6.0)",
+      "libraryId": "AcademiX",
+      "targetGraphs": [
+        ".NETFramework,Version=v4.7.2/win"
+      ]
+    },
+    {
+      "code": "NU1201",
+      "level": "Error",
+      "message": "Project AcademiX is not compatible with net472 (.NETFramework,Version=v4.7.2) / win-arm64. Project AcademiX supports: net6.0 (.NETCoreApp,Version=v6.0)",
+      "libraryId": "AcademiX",
+      "targetGraphs": [
+        ".NETFramework,Version=v4.7.2/win-arm64"
+      ]
+    },
+    {
+      "code": "NU1201",
+      "level": "Error",
+      "message": "Project AcademiX is not compatible with net472 (.NETFramework,Version=v4.7.2) / win-x64. Project AcademiX supports: net6.0 (.NETCoreApp,Version=v6.0)",
+      "libraryId": "AcademiX",
+      "targetGraphs": [
+        ".NETFramework,Version=v4.7.2/win-x64"
+      ]
+    },
+    {
+      "code": "NU1201",
+      "level": "Error",
+      "message": "Project AcademiX is not compatible with net472 (.NETFramework,Version=v4.7.2) / win-x86. Project AcademiX supports: net6.0 (.NETCoreApp,Version=v6.0)",
+      "libraryId": "AcademiX",
+      "targetGraphs": [
+        ".NETFramework,Version=v4.7.2/win-x86"
+      ]
+    }
+  ]
+}
