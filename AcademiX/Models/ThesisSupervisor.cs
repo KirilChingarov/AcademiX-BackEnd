@@ -1,8 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AcademiX.Models
 {
-	public class DegreeSupervisor : User
+	public class ThesisSupervisor : User
 	{
 		[EmailAddress]
 		public string Email { get; set; }
@@ -10,6 +11,10 @@ namespace AcademiX.Models
 		public string WorkingTime { get; set; }
 		public bool IsReviewer { get; set; }
 
-		public ICollection<SupervisorSpecialty> SupervisorSpecialties { get; set; }
+		[Required]
+		[ForeignKey("User")]
+		public int UserId { get; set; }
+
+		public ICollection<ThesisSupervisorsSpecialties> ThesisSupervisorsSpecialties { get; set; }
 	}
 }
